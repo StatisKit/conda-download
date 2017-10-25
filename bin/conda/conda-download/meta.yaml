@@ -8,7 +8,7 @@ source:
 build:
   number: 0
   entry_points:
-    - conda-download = conda_download.cli
+    - conda-download = conda_download.cli:main
 
 requirements:
   build:
