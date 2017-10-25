@@ -1,0 +1,14 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+            "folder_exclude_patterns": ["build"],
+            "file_exclude_patterns": [".travis.yml", ".sconsign.dblite", ".coverage"],
+		}
+	],
+    "settings":
+    {
+        "tab_size": 4
+    },
+}
