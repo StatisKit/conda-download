@@ -28,6 +28,6 @@ setup(
     packages=['conda_download'],
     entry_points={
         'console_scripts': ['conda-download = conda_download.cli:main']},
-    install_requires=['conda-build'],
+    install_requires=[],
     zip_safe=False,
 )
