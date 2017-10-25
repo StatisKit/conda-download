@@ -24,10 +24,10 @@ setup(
     ],
     description="tool for downloading conda recipe dependencies",
     long_description=open('README.rst').read(),
-    package_dir = {'': 'src/py'}
+    package_dir = {'': 'src/py'},
     packages=['conda_download'],
     entry_points={
         'console_scripts': ['conda-download = conda_download.cli:main']},
-    install_requires=['conda-build'],
+    install_requires=[],
     zip_safe=False,
 )
