@@ -13,12 +13,14 @@ build:
 requirements:
   build:
     - python
-    - setuptools
+    - python-toolchain
   run:
     - python
     - conda-build
 
 test:
+  requires:
+    - python-toolchain
   commands:
     - which conda-download  # [unix]
     - where conda-download  # [win]
@@ -26,10 +28,6 @@ test:
     - conda --help
   imports:
     - conda_download
-
-outputs:
-  - type: wheel
-  - name: {{ PKG_NAME }}
 
 about:
   home: https://github.com/StatisKit/conda-download

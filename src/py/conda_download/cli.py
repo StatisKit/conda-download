@@ -6,8 +6,8 @@ import conda_download
 def main():
     parser = argparse.ArgumentParser(description='Download conda recipe dependencies')
 
-    parser.add_argument('recipes',
-                        help='The folder containing conda recipes to build.')
+    parser.add_argument('directory',
+                        help='The directory containing conda recipes to build.')
 
     parser.add_argument('--run',
                         dest='run',
@@ -33,7 +33,7 @@ def main():
                         default=["default"])
 
     args = parser.parse_args()
-    conda_download.main(recipes = args.recipes,
+    conda_download.main(directory = args.directory,
                         run = args.run,
                         build = args.build,
                         *args.channels)
