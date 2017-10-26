@@ -1,1 +1,1 @@
-from .download import download
+from .download import main as download

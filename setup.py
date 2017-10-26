@@ -27,7 +27,8 @@ setup(
     package_dir = {'': 'src/py'},
     packages=['conda_tools'],
     entry_points={
-        'console_scripts': ['conda-download = conda_tools.cli:download']},
+        'console_scripts': ['conda-download = conda_tools.cli:download',
+                            'conda-release = conda_tools.cli:release']},
     install_requires=[],
     zip_safe=False,
 )

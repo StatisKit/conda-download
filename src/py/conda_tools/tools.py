@@ -1,8 +1,9 @@
 import os
 
 from conda_build import api as conda_build
+from conda_build.metadata import MetaData
 
-def list_packages(directory):
+def list_packages(directory, config=None):
     """
     Get the build metadata of all recipes in a directory.
  
@@ -11,7 +12,13 @@ def list_packages(directory):
     """
     packages = []
     root = os.path.abspath(directory)
+
     for new_root, dirs, files in os.walk(root, followlinks=True):
         if 'meta.yaml' in files:
-            packages.append(conda_build.render(new_root, config=None)[0])
+            package = conda_build.render(new_root, config=config)[0]
+            if isinstance(package, MetaData):
+                packages.append(package)
+            else:
+                packages.append(package[0])
+                
     return packages

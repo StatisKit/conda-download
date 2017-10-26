@@ -9,14 +9,14 @@ from nose.plugins.attrib import attr
       level=1)
 class testWriteMetaPackage(unittest.TestCase):
 
-    def test_create_metapackage_run(self, directory='./share/git'):
+    def test_download_run(self, directory='./share/git/FP17'):
         """Test conda_tools.download function with run dependencies"""
-        download(directory, build=False, test=False, channel_urls=["statiskit", "conda-forge"])
+        download(directory, build=False, test=False, channel_urls=["statiskit"])
 
-    def test_create_metapackage_build(self, directory='./share/git'):
+    def test_download_build(self, directory='./share/git/FP17'):
         """Test conda_tools.download function with build dependencies"""
-        download(directory, run=False, test=False, channel_urls=["statiskit", "conda-forge"])
+        download(directory, run=False, test=False, channel_urls=["statiskit"])
 
-    def test_create_metapackage_test(self, directory='./share/git'):
+    def test_download_test(self, directory='./share/git/FP17'):
         """Test conda_tools.download function with test dependencies"""
-        download(directory, build=False, run=False, channel_urls=["statiskit", "conda-forge"])
+        download(directory, build=False, run=False, channel_urls=["statiskit"])

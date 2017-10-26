@@ -9,6 +9,7 @@ build:
   number: 0
   entry_points:
     - conda-download = conda_tools.cli:download
+    - conda-release = conda_tools.cli:release
 
 requirements:
   build:
@@ -17,6 +18,7 @@ requirements:
   run:
     - python
     - conda-build
+    - networkx
 
 test:
   requires:
@@ -25,15 +27,18 @@ test:
     - conda_tools
   source_files:                                
     - test/test_*.py
-    - bin/conda/*
+    - share/git/*
   commands:                                       
-    - nosetests test -x -s -v -A "level <= {{ environ.get('TEST_LEVEL', 3) }} and linux" [linux]
-    - nosetests test -x -s -v -A "level <= {{ environ.get('TEST_LEVEL', 3) }} and osx"   [osx]
-    - nosetests test -x -s -v -A "level <= {{ environ.get('TEST_LEVEL', 3) }} and win"   [win]
     - which conda-download  # [unix]
     - where conda-download  # [win]
     - conda download -h
+    - which conda-release  # [unix]
+    - where conda-release  # [win]
+    - conda release -h
     - conda --help
+    - nosetests test -x -s -v -A "level <= {{ environ.get('TEST_LEVEL', 3) }} and linux" [linux]
+    - nosetests test -x -s -v -A "level <= {{ environ.get('TEST_LEVEL', 3) }} and osx"   [osx]
+    - nosetests test -x -s -v -A "level <= {{ environ.get('TEST_LEVEL', 3) }} and win"   [win]
 
 about:
   home: https://github.com/StatisKit/conda-tools
