@@ -4,9 +4,9 @@ platform:
 
 environment:
   matrix:
-    - CONDA_RECIPE: conda-download
+    - CONDA_RECIPE: conda-tools
       CONDA_VERSION: 2
-    - CONDA_RECIPE: conda-download
+    - CONDA_RECIPE: conda-tools
       CONDA_VERSION: 3
       
 install:
