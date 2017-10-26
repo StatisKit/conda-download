@@ -8,19 +8,27 @@
    :target: https://ci.appveyor.com/api/projects/status/py9mtxkvd2am4w1b/branch/master
 
 
-**conda-download**
-==================
+**conda-tools**: Multiple tools for easing the usage of Conda for developers
+============================================================================
 
-**conda-download** is a tool for downloading **Conda** dependencies of recipes.
-This allow to:
+**conda-tools** contains tools for:
 
-* easily build your own recipes in offline mode,
-* ensure reproducibility of scripts using **Conda** builds or installs.
+1. Downloading **Conda** dependencies of recipes.
+   This allows to:
 
+   * easily build your own recipes in offline mode,
+   * ensure reproducibility of scripts using **Conda** builds or installs.
+     
+2. Buildind a multiple **Conda** recipes.
+   This allows to:
+   
+   * easily build recipes for a release.
+   
+     
 Installation
 ------------
 
-conda install -n root conda-download
+conda install -n root conda-tools
 
 Download recipe dependencies
 ----------------------------
