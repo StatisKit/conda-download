@@ -1,0 +1,42 @@
+package:
+  name: conda-tools
+  version: "0.9.0"
+
+source:
+  path: ../../..
+
+build:
+  number: 0
+  entry_points:
+    - conda-download = conda_tools.cli:download
+
+requirements:
+  build:
+    - python
+    - python-toolchain
+  run:
+    - python
+    - conda-build
+
+test:
+  requires:
+    - python-toolchain
+  imports:
+    - conda_tools
+  source_files:                                
+    - test/test_*.py
+    - bin/conda/*
+  commands:                                       
+    - nosetests test -x -s -v -A "level <= {{ environ.get('TEST_LEVEL', 3) }} and linux" [linux]
+    - nosetests test -x -s -v -A "level <= {{ environ.get('TEST_LEVEL', 3) }} and osx"   [osx]
+    - nosetests test -x -s -v -A "level <= {{ environ.get('TEST_LEVEL', 3) }} and win"   [win]
+    - which conda-download  # [unix]
+    - where conda-download  # [win]
+    - conda download -h
+    - conda --help
+
+about:
+  home: https://github.com/StatisKit/conda-tools
+  license: Apache License 2.0
+  summary: Multiple tools for easing the usage of Conda for developers
+

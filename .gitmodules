@@ -1,0 +1,3 @@
+[submodule "share/git/FP17"]
+	path = share/git/FP17
+	url = http://github.com/Statiskit/FP17.git
