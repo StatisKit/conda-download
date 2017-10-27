@@ -3,7 +3,7 @@ import os
 from conda_build import api as conda_build
 from conda_build.metadata import MetaData
 
-def list_packages(directory, config=None):
+def list_packages(directory, channel_urls=[], config=None):
     """
     Get the build metadata of all recipes in a directory.
  

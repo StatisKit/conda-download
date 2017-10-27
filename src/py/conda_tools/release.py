@@ -15,8 +15,7 @@ from .download import main as download
 
 def main(directory, channel_urls=[], inspect_conda_bld_directory=True, config=None):
 
-    config = get_or_merge_config(config, channel_urls=channel_urls)
-    # download(directory, run=False, test=False, config=config)
+    download(directory, test=False, config=config)
 
     # if os.path.exists(sys_rc_path):
     #     with open(sys_rc_path, 'r') as filehandler:
@@ -26,12 +25,16 @@ def main(directory, channel_urls=[], inspect_conda_bld_directory=True, config=No
     # with open(sys_rc_path, 'w') as filehandler:
     #     yaml_dump(dict(channels = ["file:///"]),filehandler)
 
-    packages = list_packages(directory, config=config)
+    packages = list_packages(directory, channel_urls=channel_urls, config=config)
     graph = networkx.DiGraph()
     for index, package in enumerate(packages):
         graph.add_node(package.meta['package']['name'], identifier=index)
     for package in packages:
         for dependency in package.meta.get("requirements", {}).get("build", []):
+            dependency = dependency.split()[0]
+            if graph.has_node(dependency):
+                graph.add_edge(dependency, package.meta['package']['name'])
+        for dependency in package.meta.get("requirements", {}).get("run", []):
             dependency = dependency.split()[0]
             if graph.has_node(dependency):
                 graph.add_edge(dependency, package.meta['package']['name'])
@@ -42,10 +45,11 @@ def main(directory, channel_urls=[], inspect_conda_bld_directory=True, config=No
     for package in networkx.topological_sort(graph):
         identifier = graph.node[package]["identifier"]
         package = packages[identifier]
-        config.compute_build_id(package.name())
-        output_file_path = conda_build.get_output_file_path(package, config=config)
+        local_config = get_or_merge_config(config, channel_urls=channel_urls)
+        local_config.compute_build_id(package.name())
+        output_file_path = conda_build.get_output_file_path(package, config=local_config)
         if not inspect_conda_bld_directory or not os.path.exists(output_file_path):
-            conda_build.build(package, config=config, notest=True)
+            conda_build.build(package, config=local_config, notest=True)
         outputs[identifier] = output_file_path
 
     download(directory, config=config)
@@ -65,8 +69,9 @@ def main(directory, channel_urls=[], inspect_conda_bld_directory=True, config=No
         raise ValueError()
     for package in networkx.topological_sort(graph):
         identifier = graph.node[package]["identifier"]
-        config.compute_build_id(packages[identifier].name())
-        conda_build.test(outputs[identifier], config=config)
+        local_config = get_or_merge_config(config, channel_urls=channel_urls)
+        local_config.compute_build_id(packages[identifier].name())
+        conda_build.test(outputs[identifier], config=local_config)
 
     # if old_rc_config:
     #     with open(sys_rc_path, 'w') as filehandler:

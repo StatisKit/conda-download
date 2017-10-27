@@ -20,7 +20,7 @@ def main(directory, run=True, build=True, test=True, use_local=True, channel_url
     license_name=None
     summary=None
 
-    packages = list_packages(directory, config=config)
+    packages = list_packages(directory, channel_urls=channel_urls, config=config)
     dependencies = set()
     if run:
         for package in packages:
@@ -52,4 +52,4 @@ def main(directory, run=True, build=True, test=True, use_local=True, channel_url
     d = dict(d)
     m = MetaData.fromdict(d, config=config)
     config.compute_build_id(m.name())
-    conda_build.build(m, config=config, need_source_download=False)
+    conda_build.build(m, channel_urls=channel_urls, config=config, need_source_download=False)
