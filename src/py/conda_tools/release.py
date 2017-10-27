@@ -16,7 +16,7 @@ from .download import main as download
 def main(directory, channel_urls=[], inspect_conda_bld_directory=True, config=None):
 
     config = get_or_merge_config(config, channel_urls=channel_urls)
-    download(directory, run=False, test=False, config=config)
+    # download(directory, run=False, test=False, config=config)
 
     # if os.path.exists(sys_rc_path):
     #     with open(sys_rc_path, 'r') as filehandler:
