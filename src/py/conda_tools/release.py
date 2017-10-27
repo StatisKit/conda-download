@@ -2,8 +2,8 @@ import uuid
 import networkx
 
 from collections import defaultdict
-from conda.base.context import sys_rc_path
-from conda.common.serialize import yaml_dump, yaml_load
+# from conda.base.context import sys_rc_path
+# from conda.common.serialize import yaml_dump, yaml_load
 from conda_build.metadata import MetaData
 from conda_build.config import get_or_merge_config
 from conda_build import api as conda_build
