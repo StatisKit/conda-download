@@ -13,9 +13,9 @@ class testWriteMetaPackage(unittest.TestCase):
         """Test conda_tools.download function with run dependencies"""
         download(directory, build=False, test=False, channel_urls=["statiskit"])
 
-    def test_download_build(self, directory='./share/git/FP17'):
-        """Test conda_tools.download function with build dependencies"""
-        download(directory, run=False, test=False, channel_urls=["statiskit"])
+    # def test_download_build(self, directory='./share/git/FP17'):
+    #     """Test conda_tools.download function with build dependencies"""
+    #     download(directory, run=False, test=False, channel_urls=["statiskit"])
 
     def test_download_test(self, directory='./share/git/FP17'):
         """Test conda_tools.download function with test dependencies"""

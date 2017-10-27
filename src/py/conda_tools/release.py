@@ -2,6 +2,8 @@ import uuid
 import networkx
 
 from collections import defaultdict
+from conda.base.context import sys_rc_path
+from conda.common.serialize import yaml_dump, yaml_load
 from conda_build.metadata import MetaData
 from conda_build.config import get_or_merge_config
 from conda_build import api as conda_build
@@ -9,9 +11,18 @@ from conda_build import api as conda_build
 from .tools import list_packages
 from .download import main as download
 
-def main(directory, channel_urls=[], config=None):
+def main(directory, channel_urls=[], inspect_conda_bld_directory=True, config=None):
 
     config = get_or_merge_config(config, channel_urls=channel_urls)
+    download(config=config)
+
+    # if os.path.exists(sys_rc_path):
+    #     with open(sys_rc_path, 'r') as filehandler:
+    #         old_rc_config = yaml_load(filehandler) or None
+    # else:
+    #     old_rc_config = None
+    # with open(sys_rc_path, 'w') as filehandler:
+    #     yaml_dump(dict(channels = ["file:///"]),filehandler)
 
     packages = list_packages(directory, config=config)
     graph = networkx.DiGraph()
@@ -29,8 +40,10 @@ def main(directory, channel_urls=[], config=None):
         identifier = graph.node[package]["identifier"]
         package = packages[identifier]
         config.compute_build_id(package.name())
-        conda_build.build(package, config=config, notest=True)
-        outputs[identifier] = conda_build.get_output_file_path(package, config=config)
+        output_file_path = conda_build.get_output_file_path(package, config=config)
+        if not inspect_conda_bld_directory or not os.path.exists(output_file_path):
+            conda_build.build(package, config=config, notest=True)
+        outputs[identifier] = output_file_path
     download(directory, config=config)
     graph = networkx.DiGraph()
     for index, package in enumerate(packages):
@@ -50,3 +63,9 @@ def main(directory, channel_urls=[], config=None):
         identifier = graph.node[package]["identifier"]
         config.compute_build_id(packages[identifier].name())
         conda_build.test(outputs[identifier], config=config)
+
+    # if old_rc_config:
+    #     with open(sys_rc_path, 'w') as filehandler:
+    #         yaml_dump(old_rc_config, filehandler)
+    # else:
+    #     os.remove(sys_rc_path)

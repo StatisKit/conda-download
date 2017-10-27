@@ -1,6 +1,8 @@
 import argparse
 import os
 
+from conda import cli as conda_cli
+
 from .download import main as main_download
 from .release import main as main_release
 
@@ -35,11 +37,7 @@ def download():
                         action='store_false')
     parser.set_defaults(test=True)
 
-    parser.add_argument('-c', '--channel', nargs='*',
-                        help="""Additional channel to search for packages. These are
-                                URLs searched in the order they are given (including
-                                file:// for local directories)""",
-                        default=[])
+    conda_cli.add_parser_channels(parser)
 
     args = parser.parse_args()
     main_download(directory = args.directory,
@@ -49,17 +47,24 @@ def download():
                   channel_urls = args.channel)
 
 def release():
-    parser = argparse.ArgumentParser(description='Download conda recipe dependencies')
+    parser = argparse.ArgumentParser(description='Create a release from conda recipes')
 
     parser.add_argument('directory',
                         help='The directory containing conda recipes to build.')
 
-    parser.add_argument('-c', '--channel', nargs='*',
-                        help="""Additional channel to search for packages. These are
-                                URLs searched in the order they are given (including
-                                file:// for local directories)""",
-                        default=[])
+    parser.add_argument('--inspect-conda-bld-directory',
+                        dest='inspect_conda_bld_directory',
+                        action='store_false',
+                        help="")
+    parser.add_argument('--no-inspect-conda-bld-directory',
+                        dest='inspect_conda_bld_directory',
+                        action='store_false',
+                        help="")
+    parser.set_defaults(inspect_conda_bld_directory=True)
+
+    conda_cli.add_parser_channels(parser)
 
     args = parser.parse_args()
     main_release(directory = args.directory,
-                  channel_urls = args.channel)
+                 channel_urls = args.channel,
+                 inspect_conda_bld_directory = inspect_conda_bld_directory)
