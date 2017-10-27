@@ -1,6 +1,8 @@
 import uuid
 import networkx
 
+import os
+
 from collections import defaultdict
 # from conda.base.context import sys_rc_path
 # from conda.common.serialize import yaml_dump, yaml_load
@@ -14,7 +16,7 @@ from .download import main as download
 def main(directory, channel_urls=[], inspect_conda_bld_directory=True, config=None):
 
     config = get_or_merge_config(config, channel_urls=channel_urls)
-    download(config=config)
+    download(directory, run=False, test=False, config=config)
 
     # if os.path.exists(sys_rc_path):
     #     with open(sys_rc_path, 'r') as filehandler:
@@ -36,6 +38,7 @@ def main(directory, channel_urls=[], inspect_conda_bld_directory=True, config=No
     if not networkx.is_directed_acyclic_graph(graph):
         raise ValueError()
     outputs = [0] * len(packages)
+    print(list(networkx.topological_sort(graph)))
     for package in networkx.topological_sort(graph):
         identifier = graph.node[package]["identifier"]
         package = packages[identifier]
@@ -44,6 +47,7 @@ def main(directory, channel_urls=[], inspect_conda_bld_directory=True, config=No
         if not inspect_conda_bld_directory or not os.path.exists(output_file_path):
             conda_build.build(package, config=config, notest=True)
         outputs[identifier] = output_file_path
+
     download(directory, config=config)
     graph = networkx.DiGraph()
     for index, package in enumerate(packages):

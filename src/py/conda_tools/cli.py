@@ -69,4 +69,4 @@ def release():
     args = parser.parse_args()
     main_release(directory = args.directory,
                  channel_urls = args.channel,
-                 inspect_conda_bld_directory = inspect_conda_bld_directory)
+                 inspect_conda_bld_directory = args.inspect_conda_bld_directory)
