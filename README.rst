@@ -4,9 +4,8 @@
 .. image:: https://travis-ci.org/StatisKit/conda-download.svg?branch=master
    :target: https://travis-ci.org/StatisKit/conda-download
   
-.. image:: https://ci.appveyor.com/api/projects/status/py9mtxkvd2am4w1b/branch/master
-   :target: https://ci.appveyor.com/api/projects/status/py9mtxkvd2am4w1b/branch/master
-
+.. image:: https://ci.appveyor.com/api/projects/status/uwqs5ft5c5ehcmj4/branch/master
+   :target: https://ci.appveyor.com/api/projects/status/uwqs5ft5c5ehcmj4/branch/master
 
 **conda-tools**: Multiple tools for easing the usage of Conda for developers
 ============================================================================
