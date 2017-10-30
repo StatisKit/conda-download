@@ -1,8 +1,8 @@
 .. image:: https://img.shields.io/badge/License-Apache%202.0-yellow.svg
    :target: https://opensource.org/licenses/Apache-2.0
    
-.. image:: https://travis-ci.org/StatisKit/conda-download.svg?branch=master
-   :target: https://travis-ci.org/StatisKit/conda-download
+.. image:: https://travis-ci.org/StatisKit/conda-tools.svg?branch=master
+   :target: https://travis-ci.org/StatisKit/conda-tools
   
 .. image:: https://ci.appveyor.com/api/projects/status/uwqs5ft5c5ehcmj4/branch/master
    :target: https://ci.appveyor.com/project/pfernique/conda-tools-7kn1b/branch/master
