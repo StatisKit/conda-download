@@ -5,8 +5,8 @@
    :target: https://travis-ci.org/StatisKit/conda-download
   
 .. image:: https://ci.appveyor.com/api/projects/status/uwqs5ft5c5ehcmj4/branch/master
-   :target: https://ci.appveyor.com/api/projects/status/uwqs5ft5c5ehcmj4/branch/master
-
+   :target: https://ci.appveyor.com/project/pfernique/conda-tools-7kn1b/branch/master
+   
 **conda-tools**: Multiple tools for easing the usage of Conda for developers
 ============================================================================
 
