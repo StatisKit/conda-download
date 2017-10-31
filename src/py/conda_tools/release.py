@@ -48,8 +48,6 @@ def main(directory, channel_urls=[], inspect_conda_bld_directory=True, config=No
         local_config = get_or_merge_config(config, channel_urls=channel_urls)
         local_config.compute_build_id(package.name())
         output_file_path = conda_build.get_output_file_path(package, config=local_config)
-        import pdb
-        pdb.set_trace()
         if isinstance(output_file_path, list):
             output_file_path = output_file_path.pop()
         output_file_path = str(output_file_path)
