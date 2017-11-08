@@ -7,8 +7,8 @@
 .. image:: https://ci.appveyor.com/api/projects/status/uwqs5ft5c5ehcmj4/branch/master
    :target: https://ci.appveyor.com/project/pfernique/conda-tools-7kn1b/branch/master
    
-**conda-tools**: Multiple tools for easing the usage of Conda for developers
-============================================================================
+**conda-tools**: Tools for easing the usage of Conda for developers
+===================================================================
 
 **conda-tools** contains tools for:
 
