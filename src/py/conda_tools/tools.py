@@ -20,6 +20,8 @@ def list_packages(directory, channel_urls=[], config=None):
                 packages.append(package)
             else:
                 packages.append(package[0])
+            if packages[-1].get('build', {}).get('skip', False):
+                packages.pop()
 
     return packages
 
