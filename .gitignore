@@ -1,3 +1,14 @@
-*.pyc
-*~
+*.sublime-workspace
+.ipynb_checkpoints
+doc/_build
+doc/_static
+*.*~
+*.swp
+*.so
+*.os
+*.py[cod]
+*.egg
+*.egg-info
+build
+.sconsign.dblite
 *.sublime-workspace
