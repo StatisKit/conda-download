@@ -13,11 +13,16 @@ build:
 
 requirements:
   build:
-    - python
+    - python {{ PY_VER }}
     - python-toolchain
-  run:
-    - python
+    - conda
     - conda-build
+    - anaconda-client
+  run:
+    - python {{ PY_VER }}
+    - {{ pin_compatible('conda', exact=True) }}
+    - {{ pin_compatible('conda-build', exact=True) }}
+    - {{ pin_compatible('anaconda-client', exact=True) }}
     - networkx
 
 test:
