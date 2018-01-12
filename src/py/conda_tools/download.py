@@ -17,7 +17,7 @@ def main(directory, run=True, build=True, test=True, use_local=True, channel_url
     entry_points = ()
     build_string=None
     home=None
-    license_name=None
+    license=None
     summary=None
 
     packages = list_packages(directory, channel_urls=channel_urls, config=config)
@@ -38,18 +38,18 @@ def main(directory, run=True, build=True, test=True, use_local=True, channel_url
     dependencies = [dependency for dependency in dependencies if not dependency in packages]
 
     metapackage = 'conda-tools-' + uuid.uuid4().hex
-    d = defaultdict(dict)
-    d['package']['name'] = metapackage
-    d['package']['version'] = version
-    d['build']['number'] = build_number
-    d['build']['entry_points'] = entry_points
-    d['build']['string'] = build_string
-    d['requirements']['run'] = dependencies
-    d['about']['home'] = home
-    d['about']['license'] = license_name
-    d['about']['summary'] = summary
-    d['test']['commands'] = ['ls [unix]', 'dir [win]']
-    d = dict(d)
-    m = MetaData.fromdict(d, config=config)
-    config.compute_build_id(m.name())
-    conda_build.build(m, channel_urls=channel_urls, config=config, need_source_download=False)
+    metadata = defaultdict(dict)
+    metadata['package']['name'] = metapackage
+    metadata['package']['version'] = version
+    metadata['build']['number'] = build_number
+    metadata['build']['entry_points'] = entry_points
+    metadata['build']['string'] = build_string
+    metadata['requirements']['run'] = dependencies
+    metadata['about']['home'] = home
+    metadata['about']['license'] = license
+    metadata['about']['summary'] = summary
+    metadata['test']['commands'] = ['ls [unix]', 'dir [win]']
+    metadata = dict(metadata)
+    metadata = MetaData.fromdict(metadata, config=config)
+    config.compute_build_id(metadata.name())
+    conda_build.build(metadata, channel_urls=channel_urls, config=config, need_source_download=False)
