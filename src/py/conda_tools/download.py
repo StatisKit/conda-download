@@ -35,6 +35,8 @@ def main(directory, run=True, build=True, test=True, use_local=True, channel_url
             for dependency in package.meta.get("test", {}).get("requires", []):
                 dependencies.add(dependency.split()[0])
     packages = {package.meta['package']['name'] for package in packages}
+    import pdb
+    pdb.set_trace()
     dependencies = [dependency for dependency in dependencies if not dependency in packages]
 
     metapackage = 'conda-tools-' + uuid.uuid4().hex

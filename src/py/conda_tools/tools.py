@@ -15,11 +15,13 @@ def list_packages(directory, channel_urls=[], config=None):
 
     for new_root, dirs, files in os.walk(root, followlinks=True):
         if 'meta.yaml' in files:
-            package = conda_build.render(new_root, config=config)[0]
-            if isinstance(package, MetaData):
-                packages.append(package)
-            else:
-                packages.append(package[0])
+            for package in conda_build.render(new_root, config=config):
+                if isinstance(package, MetaData):
+                    packages.append(package)
+                else:
+                    packages.append(package[0])
+                if packages[-1].meta.get('build', {}).get('skip', False):
+                    packages.pop()
 
     return packages
 
