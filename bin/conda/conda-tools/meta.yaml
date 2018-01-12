@@ -37,8 +37,8 @@ requirements:
   build:
     - python {{ PY_VER }}
     - python-toolchain
-    - conda
-    - conda-build
+    - conda 4.3.30
+    - conda-build 3.0.30
     - anaconda-client
   run:
     - python {{ PY_VER }}
