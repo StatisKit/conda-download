@@ -35,13 +35,13 @@ build:
 
 requirements:
   build:
-    - python {{ PY_VER }}
+    - python
     - python-toolchain
     - conda 4.3.30
     - conda-build 3.0.30
     - anaconda-client
   run:
-    - python {{ PY_VER }}
+    - python
     - {{ pin_compatible('conda', exact=True) }}
     - {{ pin_compatible('conda-build', exact=True) }}
     - {{ pin_compatible('anaconda-client', exact=True) }}
